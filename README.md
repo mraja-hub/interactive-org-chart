@@ -27,39 +27,32 @@ This project uses [Bun](https://bun.sh/) as the JavaScript runtime and package m
 ```
 org-chart
 ├── src
-│   ├── App.css
-│   ├── App.tsx
-│   ├── index.css
-│   ├── main.tsx
-│   ├── mockEmployees.ts
-│   ├── vite-env.d.ts
-│   ├── components
-│   │   ├── CustomNode.tsx
-│   │   ├── EmployeeNode.tsx
-│   │   ├── OrgChart.css
-│   │   ├── OrgChart.tsx
-│   │   ├── Sidebar.css
-│   │   └── Sidebar.tsx
-│   ├── services
-│   │   └── employeeService.ts
-│   └── utils
-│       └── buildTreeData.ts
+│   ├── App.tsx            # Main app component
+│   ├── App.css            # Global app styles
+│   ├── index.css          # Base CSS
+│   ├── main.tsx           # App entry point
+│   ├── mockEmployees.ts   # Realistic mock employee data
+│   ├── vite-env.d.ts      # Vite/TS env types
+│   ├── components         # UI components
+│   │   ├── CustomNode.tsx   # Custom org chart node renderer
+│   │   ├── EmployeeNode.tsx # Individual employee node
+│   │   ├── OrgChart.tsx     # Org chart logic & rendering
+│   │   ├── OrgChart.css     # Org chart styles
+│   │   ├── Sidebar.tsx      # Sidebar filter/search
+│   │   ├── Sidebar.css      # Sidebar styles
+│   ├── services           # API/data services
+│   │   └── employeeService.ts # Employee API logic
+│   ├── utils              # Utility functions
+│   │   └── buildTreeData.ts   # Org tree construction/cycle prevention
 ├── public
-│   └── index.html
-├── package.json
-├── bun.lock
-├── tsconfig.json
-└── README.md
+│   └── index.html         # HTML entry point
+├── package.json           # Project metadata & scripts
+├── bun.lock               # Bun package lock
+├── tsconfig.json          # TypeScript config
+├── tailwind.config.js     # Tailwind CSS config
+├── vite.config.ts         # Vite build config
+└── README.md              # Project documentation
 ```
-
-## Packages & Technical Details
-
-- **React**: UI library
-- **TypeScript**: Type safety
-- **Vite**: Fast dev/build tool
-- **Bun**: Runtime and package manager
-- **@dnd-kit/core**: Drag-and-drop engine
-- **react-zoom-pan-pinch**: Zoom/pan gestures for chart navigation
 
 ## Getting Started
 
@@ -104,7 +97,10 @@ Snapshot testing is not used; all tests are logic- and UI-driven.
 
 ## Deployment
 
-You can deploy this app to Netlify, Vercel, or any static hosting platform that supports Vite/React projects.
+This app is deployed on Vercel and accessible at:  
+[https://interactive-org-chart.vercel.app/](https://interactive-org-chart.vercel.app/)
+
+![Screenshot of Interactive Org Chart](./assets/org-chart-screenshot.png)
 
 ## Development Experience
 
@@ -116,6 +112,11 @@ You can deploy this app to Netlify, Vercel, or any static hosting platform that 
 - **Vite + React + TypeScript** for fast builds, type safety, and modern DX.
 - **Bun** for local dev speed and package management.
 - **TypeScript** chosen for strong typing, maintainability, and team scaling.
+- **react-d3-tree**: Org chart rendering, zoom/pan
+- **MirageJS**: Mock API server for development/testing
+- **Vitest**: Unit and integration testing
+- **React Testing Library**: UI testing utilities
+- **Tailwind CSS**: Utility-first CSS framework
 
 ### 2. Org Chart Rendering
 
