@@ -11,6 +11,13 @@ This project is a modern React application for visualizing and managing an inter
 - **Responsive UI**: Sidebar controls are always visible; employee list is scrollable.
 - **Accessible & Modern Design**: Clean layout, color contrasts, and keyboard navigation support.
 
+## Demo
+
+This app is deployed on Vercel and accessible at:  
+[https://interactive-org-chart.vercel.app/](https://interactive-org-chart.vercel.app/)
+
+![Screenshot of Interactive Org Chart](./assets/org-chart-screenshot.png)
+
 ## Why Bun?
 
 This project uses [Bun](https://bun.sh/) as the JavaScript runtime and package manager, alongside Vite for fast development and builds. Bun offers:
@@ -94,13 +101,6 @@ Test coverage includes:
 - App integration (loading, error, manager change)
 
 Snapshot testing is not used; all tests are logic- and UI-driven.
-
-## Deployment
-
-This app is deployed on Vercel and accessible at:  
-[https://interactive-org-chart.vercel.app/](https://interactive-org-chart.vercel.app/)
-
-![Screenshot of Interactive Org Chart](./assets/org-chart-screenshot.png)
 
 ## Development Experience
 
