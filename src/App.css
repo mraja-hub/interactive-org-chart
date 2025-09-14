@@ -1,0 +1,58 @@
+/* Restore previous custom CSS for global styles */
+#root {
+  width: 100vw;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  position: relative;
+}
+
+body {
+  color: #222;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+}
+
+h1, h2 {
+  color: #2563eb;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+input, select {
+  background: #fff;
+  border: 1px solid #b3c6e6;
+  border-radius: 6px;
+  color: #222;
+  font-size: 1rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-right: 0.5rem;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.08);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+button:hover {
+  background: #60a5fa;
+  box-shadow: 0 4px 16px rgba(37,99,235,0.15);
+}
+
+aside ul li {
+  background: #f5faff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(37,99,235,0.04);
+  border-left: 4px solid #2563eb;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+}
