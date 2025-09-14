@@ -7,6 +7,7 @@ export interface Employee {
   designation: string;
   team: string;
   manager: string | null;
+  photoUrl?: string;
 }
 
 interface SidebarProps {

@@ -29,13 +29,35 @@ const OrgChart: React.FC<OrgChartProps> = ({ employees, onManagerChange, selecte
     if (hierarchyPointNode && nodeDatum.attributes?.id) {
       hierarchyNodeMap.current[nodeDatum.attributes.id] = hierarchyPointNode;
     }
+
+    // Determine image source: use photoUrl if present, else fallback to ui-avatars
+    const photoUrl =
+      nodeDatum.attributes.photoUrl ||
+      `https://ui-avatars.com/api/?name=${encodeURIComponent(nodeDatum.name)}&background=2563eb&color=fff&size=128`;
+
     return (
       <g>
-        <foreignObject width={220} height={100} x={-110} y={-40}>
-          <div className="node-card">
-            <div className="node-name">{nodeDatum.name}</div>
-            <div className="node-designation">({nodeDatum.attributes.designation})</div>
-            <div className="node-team">{nodeDatum.attributes.team}</div>
+        <foreignObject width={220} height={70} x={-110} y={-35}>
+          <div className="node-card node-card-row">
+            <img
+              src={photoUrl}
+              alt={nodeDatum.name}
+              className="node-photo"
+              style={{
+                width: 48,
+                height: 48,
+                borderRadius: 8,
+                objectFit: "cover",
+                marginRight: 16,
+                background: "#e3eafc",
+                marginBottom: 0,
+              }}
+            />
+            <div className="node-info">
+              <div className="node-name">{nodeDatum.name}</div>
+              <div className="node-designation">({nodeDatum.attributes.designation})</div>
+              <div className="node-team">{nodeDatum.attributes.team}</div>
+            </div>
           </div>
         </foreignObject>
       </g>
