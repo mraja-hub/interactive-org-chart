@@ -19,7 +19,6 @@ interface SidebarProps {
   onTeamChange: (value: string) => void;
   teams: string[];
   onSelectEmployee?: (id: string) => void;
-  selectedEmployeeId?: string | null;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -30,7 +29,6 @@ const Sidebar: React.FC<SidebarProps> = ({
   onTeamChange,
   teams,
   onSelectEmployee,
-  selectedEmployeeId,
 }) => {
   return (
     <aside className="sidebar">
@@ -60,7 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         {employees.map((emp) => (
           <li
             key={emp.id}
-            className={`sidebar-list-item${emp.id === selectedEmployeeId ? ' selected' : ''}`}
+            className="sidebar-list-item"
             onClick={() => onSelectEmployee && onSelectEmployee(emp.id)}
           >
             <span className="sidebar-list-name">{emp.name}</span>

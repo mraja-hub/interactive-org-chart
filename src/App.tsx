@@ -11,7 +11,6 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [team, setTeam] = useState('');
-  const [selectedEmployeeId, setSelectedEmployeeId] = useState<string | null>(null);
 
   useEffect(() => {
     setEmployees(mockEmployees);
@@ -51,13 +50,10 @@ function App() {
         team={team}
         onTeamChange={setTeam}
         teams={teams}
-        onSelectEmployee={setSelectedEmployeeId}
-        selectedEmployeeId={selectedEmployeeId}
       />
       <OrgChart
         employees={chartEmployees}
         onManagerChange={handleManagerChange}
-        selectedEmployeeId={selectedEmployeeId}
       />
     </div>
   );

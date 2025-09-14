@@ -58,15 +58,8 @@
   padding: 0.5rem 0.75rem;
   border: 1px solid #ccc;
   font-weight: 400;
-  cursor: pointer;
 }
 
-.sidebar-list-item.selected {
-  background: #e3eafc;
-  border: 2px solid #2563eb;
-  font-weight: 700;
-  box-shadow: 0 2px 8px rgba(37,99,235,0.08);
-}
 
 .sidebar-list-item .sidebar-list-name {
   font-weight: 700;

@@ -8,26 +8,19 @@ import "./OrgChart.css";
 interface OrgChartProps {
   employees: Employee[];
   onManagerChange: (employeeId: string, newManagerId: string) => void;
-  selectedEmployeeId?: string | null;
 }
 
 
 
-const OrgChart: React.FC<OrgChartProps> = ({ employees, onManagerChange, selectedEmployeeId }) => {
+const OrgChart: React.FC<OrgChartProps> = ({ employees, onManagerChange }) => {
   const treeData = useMemo(() => buildTreeData(employees), [employees]);
   const treeRef = useRef<any>(null);
-  // Map employeeId to hierarchy node
-  const hierarchyNodeMap = useRef<Record<string, any>>({});
 
-  // Custom node renderer, also builds map of employeeId to hierarchy node
+  // Custom node renderer
   const renderNode = (props: any) => {
-    const { nodeDatum, hierarchyPointNode } = props;
+    const { nodeDatum } = props;
     if (nodeDatum.attributes?.id === "root") {
       return <g />;
-    }
-    // Store mapping for centering
-    if (hierarchyPointNode && nodeDatum.attributes?.id) {
-      hierarchyNodeMap.current[nodeDatum.attributes.id] = hierarchyPointNode;
     }
 
     // Determine image source: use photoUrl if present, else fallback to ui-avatars
@@ -65,18 +58,10 @@ const OrgChart: React.FC<OrgChartProps> = ({ employees, onManagerChange, selecte
     );
   };
 
-  // Center on selected employee
-  useEffect(() => {
-    if (!selectedEmployeeId || !treeRef.current) return;
-    const hierarchyNode = hierarchyNodeMap.current[selectedEmployeeId];
-    if (hierarchyNode && typeof treeRef.current.centerNode === "function") {
-      treeRef.current.centerNode(hierarchyNode);
-    }
-  }, [selectedEmployeeId, treeData]);
 
   // Zoom state and controls
   const [zoom, setZoom] = React.useState(1);
-  const minZoom = 0.2;
+  const minZoom = 0.1;
   const maxZoom = 3.5;
 
   // Update zoom on Tree
@@ -106,66 +91,12 @@ const OrgChart: React.FC<OrgChartProps> = ({ employees, onManagerChange, selecte
 
   return (
     <section className="org-section">
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
+      <div className="org-header">
         <h2 className="org-title">Organization Chart</h2>
-        <div style={{
-          position: "relative",
-          zIndex: 2,
-          background: "#fff",
-          borderRadius: 16,
-          boxShadow: "0 2px 8px rgba(37,99,235,0.08)",
-          padding: "0.25rem 0.5rem",
-          display: "flex",
-          gap: "0.25rem",
-        }}>
-          <button
-            style={{
-              background: "#2563eb",
-              color: "#fff",
-              borderRadius: 16,
-              padding: "0.25rem 0.6rem",
-              fontWeight: 600,
-              border: "none",
-              cursor: "pointer",
-              fontSize: "1rem",
-            }}
-            onClick={handleZoomOut}
-            title="Zoom Out"
-          >
-            -
-          </button>
-          <button
-            style={{
-              background: "#2563eb",
-              color: "#fff",
-              borderRadius: 16,
-              padding: "0.25rem 0.6rem",
-              fontWeight: 600,
-              border: "none",
-              cursor: "pointer",
-              fontSize: "1rem",
-            }}
-            onClick={handleZoomIn}
-            title="Zoom In"
-          >
-            +
-          </button>
-          <button
-            style={{
-              background: "#2563eb",
-              color: "#fff",
-              borderRadius: 16,
-              padding: "0.25rem 0.6rem",
-              fontWeight: 600,
-              border: "none",
-              cursor: "pointer",
-              fontSize: "1rem",
-            }}
-            onClick={handleZoomReset}
-            title="Reset Zoom"
-          >
-            Reset
-          </button>
+        <div className="org-zoom-controls">
+          <button className="org-zoom-btn" onClick={handleZoomOut} title="Zoom Out">-</button>
+          <button className="org-zoom-btn" onClick={handleZoomIn} title="Zoom In">+</button>
+          <button className="org-zoom-btn" onClick={handleZoomReset} title="Reset Zoom">Reset</button>
         </div>
       </div>
       <div className="org-canvas">
