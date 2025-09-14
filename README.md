@@ -27,14 +27,23 @@ This project uses [Bun](https://bun.sh/) as the JavaScript runtime and package m
 ```
 org-chart
 ├── src
+│   ├── App.css
+│   ├── App.tsx
+│   ├── index.css
+│   ├── main.tsx
+│   ├── mockEmployees.ts
+│   ├── vite-env.d.ts
 │   ├── components
-│   │   ├── OrgChart.tsx         # Main org chart rendering & pinch/zoom logic
-│   │   ├── EmployeeNode.tsx     # Recursive tree node with drag-and-drop
-│   │   ├── Sidebar.tsx          # Employee list, search, and filter controls
-│   ├── mockEmployees.ts         # Mock data for demo/testing
-│   ├── App.tsx                  # App layout and state management
-│   ├── App.css                  # Custom global styles
-│   └── main.tsx                 # Entry point
+│   │   ├── CustomNode.tsx
+│   │   ├── EmployeeNode.tsx
+│   │   ├── OrgChart.css
+│   │   ├── OrgChart.tsx
+│   │   ├── Sidebar.css
+│   │   └── Sidebar.tsx
+│   ├── services
+│   │   └── employeeService.ts
+│   └── utils
+│       └── buildTreeData.ts
 ├── public
 │   └── index.html
 ├── package.json
@@ -77,6 +86,7 @@ org-chart
 
 You can deploy this app to Netlify, Vercel, or any static hosting platform that supports Vite/React projects.
 
+## Development Experience
 
 <details>
 <summary>📖 <strong>Decision Points & Considerations</strong></summary>
