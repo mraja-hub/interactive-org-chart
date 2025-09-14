@@ -37,26 +37,27 @@ const OrgChart: React.FC<OrgChartProps> = ({ employees, onManagerChange, selecte
 
     return (
       <g>
-        <foreignObject width={220} height={70} x={-110} y={-35}>
-          <div className="node-card node-card-row">
+        <foreignObject width={320} height={110} x={-160} y={-55}>
+          <div className="node-card node-card-row" style={{ minHeight: 90, minWidth: 280, maxWidth: 400, paddingLeft: 18 }}>
             <img
               src={photoUrl}
               alt={nodeDatum.name}
               className="node-photo"
               style={{
-                width: 48,
-                height: 48,
+                width: 64,
+                height: 64,
                 borderRadius: 8,
                 objectFit: "cover",
-                marginRight: 16,
+                marginRight: 20,
                 background: "#e3eafc",
                 marginBottom: 0,
+                flexShrink: 0,
               }}
             />
-            <div className="node-info">
-              <div className="node-name">{nodeDatum.name}</div>
-              <div className="node-designation">({nodeDatum.attributes.designation})</div>
-              <div className="node-team">{nodeDatum.attributes.team}</div>
+            <div className="node-info" style={{ minWidth: 0 }}>
+              <div className="node-name" style={{ fontWeight: 700, fontSize: "1.35rem", wordBreak: "break-word" }}>{nodeDatum.name}</div>
+              <div className="node-designation" style={{ fontSize: "1.08rem", color: "#333", wordBreak: "break-word" }}>({nodeDatum.attributes.designation})</div>
+              <div className="node-team" style={{ fontSize: "1rem", color: "#888", wordBreak: "break-word" }}>{nodeDatum.attributes.team}</div>
             </div>
           </div>
         </foreignObject>
@@ -94,8 +95,8 @@ const OrgChart: React.FC<OrgChartProps> = ({ employees, onManagerChange, selecte
     orientation: "vertical" as const,
     pathFunc: "elbow" as const,
     translate: { x: 800, y: 80 },
-    nodeSize: { x: 260, y: 140 },
-    separation: { siblings: 1.2, nonSiblings: 1.6 },
+    nodeSize: { x: 340, y: 170 },
+    separation: { siblings: 1.6, nonSiblings: 2.2 },
     zoomable: true,
     collapsible: true,
     renderCustomNodeElement: renderNode,

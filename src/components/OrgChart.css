@@ -12,6 +12,10 @@
   font-weight: 800;
   color: #2563eb;
   margin: 0 0 1rem 0;
+  background: linear-gradient(90deg, #e3eafc 0%, #f7f8fa 100%);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.04);
 }
 
 /* container that holds the svg/tree; adjust height as needed */
