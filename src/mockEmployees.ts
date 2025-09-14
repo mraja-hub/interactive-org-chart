@@ -185,15 +185,14 @@ for (let i = indices.length - 1; i > 0; i--) {
 }
 const photoIndices = indices.slice(0, photoCount);
 
-const employeesWithPhotos: Employee[] = []
-// employees.map((emp, idx) => {
-//   if (photoIndices.includes(idx)) {
-//     return {
-//       ...emp,
-//       photoUrl: mockPhotos[idx % mockPhotos.length],
-//     };
-//   }
-//   return emp;
-// });
+const employeesWithPhotos: Employee[] = employees.map((emp, idx) => {
+  if (photoIndices.includes(idx)) {
+    return {
+      ...emp,
+      photoUrl: mockPhotos[idx % mockPhotos.length],
+    };
+  }
+  return emp;
+});
 
 export default employeesWithPhotos;
