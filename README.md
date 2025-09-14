@@ -11,6 +11,17 @@ This project is a modern React application for visualizing and managing an inter
 - **Responsive UI**: Sidebar controls are always visible; employee list is scrollable.
 - **Accessible & Modern Design**: Clean layout, color contrasts, and keyboard navigation support.
 
+## Why Bun?
+
+This project uses [Bun](https://bun.sh/) as the JavaScript runtime and package manager, alongside Vite for fast development and builds. Bun offers:
+
+- Much faster installs and script execution than npm or yarn
+- Native TypeScript and JSX support
+- Improved developer experience with modern features
+- Seamless compatibility with Vite and React
+
+**Note:** You must use Bun for all commands (not npm or yarn).
+
 ## Architecture & File Structure
 
 ```
@@ -27,6 +38,7 @@ org-chart
 ├── public
 │   └── index.html
 ├── package.json
+├── bun.lock
 ├── tsconfig.json
 └── README.md
 ```
@@ -36,25 +48,29 @@ org-chart
 - **React**: UI library
 - **TypeScript**: Type safety
 - **Vite**: Fast dev/build tool
+- **Bun**: Runtime and package manager
 - **@dnd-kit/core**: Drag-and-drop engine
 - **react-zoom-pan-pinch**: Zoom/pan gestures for chart navigation
 
 ## Getting Started
 
-1. **Clone the repository:**
+1. **Install Bun:**
+   [Follow Bun installation instructions](https://bun.sh/docs/installation)
+
+2. **Clone the repository:**
    ```
    git clone <repository-url>
    cd org-chart
    ```
-2. **Install dependencies:**
+3. **Install dependencies:**
    ```
-   npm install
+   bun install
    ```
-3. **Start the development server:**
+4. **Start the development server:**
    ```
-   npm run dev
+   bun run dev
    ```
-4. **Open the app:**
+5. **Open the app:**
    Visit `http://localhost:5173` in your browser.
 
 ## Deployment
@@ -68,4 +84,3 @@ You can deploy this app to Netlify, Vercel, or any static hosting platform that 
 - Org chart layout uses custom tree rendering with connector lines for clarity.
 - Sidebar controls are sticky; only the employee list scrolls for usability.
 - Easily extendable for real API integration or additional features.
-
