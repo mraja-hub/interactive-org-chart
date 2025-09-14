@@ -16,7 +16,7 @@ This project is a modern React application for visualizing and managing an inter
 This app is deployed on Vercel and accessible at:  
 [https://interactive-org-chart.vercel.app/](https://interactive-org-chart.vercel.app/)
 
-![Screenshot of Interactive Org Chart](./assets/org-chart-screenshot.png)
+![Screenshot: Interactive Org Chart](./assets/org-chart-screenshot.png)
 
 ## Architecture & File Structure
 
