@@ -22,10 +22,12 @@ const OrgChart: React.FC<OrgChartProps> = ({ employees, onManagerChange }) => {
     if (nodeDatum.attributes?.id === "root") {
       return <g />;
     }
+    const isRoot = nodeDatum.parent == null;
     return (
       <CustomNode
         nodeDatum={nodeDatum}
         onManagerChange={onManagerChange}
+        isRoot={isRoot}
       />
     );
   };

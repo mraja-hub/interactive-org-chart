@@ -4,13 +4,15 @@ import { useDraggable, useDroppable } from "@dnd-kit/core";
 interface CustomNodeProps {
   nodeDatum: any;
   onManagerChange: (employeeId: string, newManagerId: string) => void;
+  isRoot?: boolean;
 }
 
-const CustomNode: React.FC<CustomNodeProps> = ({ nodeDatum, onManagerChange }) => {
+const CustomNode: React.FC<CustomNodeProps> = ({ nodeDatum, onManagerChange, isRoot }) => {
   const id = nodeDatum.attributes?.id;
 
+  // Only enable draggable for non-root nodes
   const { attributes, listeners, setNodeRef: setDragRef, isDragging } =
-    useDraggable({ id });
+    useDraggable({ id, disabled: isRoot });
   const { setNodeRef: setDropRef, isOver } = useDroppable({ id });
 
   const photoUrl =
@@ -37,6 +39,7 @@ const CustomNode: React.FC<CustomNodeProps> = ({ nodeDatum, onManagerChange }) =
             paddingLeft: 18,
             opacity: isDragging ? 0.5 : 1,
             background: isOver ? "#e0f7fa" : "#fff",
+            cursor: isRoot ? "not-allowed" : "pointer",
           }}
           data-employee-id={id}
         >
@@ -61,9 +64,13 @@ const CustomNode: React.FC<CustomNodeProps> = ({ nodeDatum, onManagerChange }) =
                 fontWeight: 700,
                 fontSize: "1.35rem",
                 wordBreak: "break-word",
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
               }}
             >
               {nodeDatum.name}
+              {isRoot && <span title="CEO is fixed" style={{ fontSize: "1.2rem", marginLeft: 4 }}>🔒</span>}
             </div>
             <div
               className="node-designation"
