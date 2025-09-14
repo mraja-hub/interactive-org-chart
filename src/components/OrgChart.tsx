@@ -61,12 +61,35 @@ const OrgChart: React.FC<OrgChartProps> = ({ employees, onManagerChange }) => {
     zoom,
   };
 
-  // DnD handler: when a node is dropped onto another, call onManagerChange
+  // Build children map for safe-drop logic
+  const buildChildrenMap = (emps: Employee[]) => {
+    const map: Record<string, string[]> = {};
+    emps.forEach((emp) => {
+      if (emp.manager) {
+        if (!map[emp.manager]) map[emp.manager] = [];
+        map[emp.manager].push(emp.id);
+      }
+    });
+    return map;
+  };
+  const childrenMap = useMemo(() => buildChildrenMap(employees), [employees]);
+
+  // Helper to check if newManagerId is inside dragged employee's subtree
+  const isDescendant = (childId: string, targetManagerId: string): boolean => {
+    if (!childrenMap[childId]) return false;
+    if (childrenMap[childId].includes(targetManagerId)) return true;
+    return childrenMap[childId].some((c) => isDescendant(c, targetManagerId));
+  };
+
+  // DnD handler: when a node is dropped onto another, call onManagerChange with safe-drop logic
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
-    if (active?.id && over?.id && active.id !== over.id) {
-      onManagerChange(String(active.id), String(over.id));
-    }
+    if (!active?.id || !over?.id) return;
+    const draggedId = String(active.id);
+    const newManagerId = String(over.id);
+    if (draggedId === newManagerId) return; // ignore self-drop
+    if (isDescendant(draggedId, newManagerId)) return; // prevent cycle
+    onManagerChange(draggedId, newManagerId);
   };
 
   return (
