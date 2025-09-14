@@ -1,6 +1,16 @@
 // src/mockEmployees.ts
 import type { Employee } from './components/Sidebar';
 
+// Add photoUrl to 75% of employees
+// Generate unique randomuser.me photo URLs for 75% of employees
+const total = 44; // number of employees
+const photoCount = Math.floor(total * 0.75);
+const mockPhotos: string[] = Array.from({ length: photoCount }, (_, idx) => {
+  const gender = idx % 2 === 0 ? "men" : "women";
+  const num = (idx % 99) + 1; // randomuser.me supports 1-99
+  return `https://randomuser.me/api/portraits/${gender}/${num}.jpg`;
+});
+
 const employees: Employee[] = [
   // CEO
   { id: '1', name: 'Jordan Smith', designation: 'CEO', team: 'Management', manager: null },
@@ -167,4 +177,22 @@ const employees: Employee[] = [
   { id: '44', name: 'Devon Martin', designation: 'HR Coordinator', team: 'HR', manager: '42' },
 ];
 
-export default employees;
+// Randomly select 75% of employees to assign photos
+const indices = Array.from({ length: employees.length }, (_, i) => i);
+for (let i = indices.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [indices[i], indices[j]] = [indices[j], indices[i]];
+}
+const photoIndices = indices.slice(0, photoCount);
+
+const employeesWithPhotos: Employee[] = employees.map((emp, idx) => {
+  if (photoIndices.includes(idx)) {
+    return {
+      ...emp,
+      photoUrl: mockPhotos[idx % mockPhotos.length],
+    };
+  }
+  return emp;
+});
+
+export default employeesWithPhotos;

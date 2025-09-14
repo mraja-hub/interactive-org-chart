@@ -12,9 +12,10 @@ export function buildTreeData(employees: Employee[]) {
           id: emp.id,
           designation: emp.designation,
           team: emp.team,
+          photoUrl: emp.photoUrl,
         },
         children: [] as any[],
-        parent: undefined, // will be set later
+        parent: undefined
       });
     });
 
