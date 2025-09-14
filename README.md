@@ -79,8 +79,28 @@ org-chart
    ```
    bun run dev
    ```
+
 5. **Open the app:**
    Visit `http://localhost:5173` in your browser.
+
+## Running Tests
+
+Unit and integration tests are written using [Vitest](https://vitest.dev/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/).
+
+To execute all tests:
+
+```
+bun run test
+```
+
+Test coverage includes:
+- API service logic (employeeService)
+- Org chart tree building and cycle prevention
+- Sidebar filtering and search
+- CustomNode rendering (photo fallback, lock icon)
+- App integration (loading, error, manager change)
+
+Snapshot testing is not used; all tests are logic- and UI-driven.
 
 ## Deployment
 
