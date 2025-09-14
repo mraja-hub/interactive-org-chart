@@ -73,6 +73,22 @@ const OrgChart: React.FC<OrgChartProps> = ({ employees, onManagerChange, selecte
     }
   }, [selectedEmployeeId, treeData]);
 
+  // Zoom state and controls
+  const [zoom, setZoom] = React.useState(1);
+  const minZoom = 0.2;
+  const maxZoom = 3.5;
+
+  // Update zoom on Tree
+  useEffect(() => {
+    if (treeRef.current && typeof treeRef.current.zoom === "function") {
+      treeRef.current.zoom(zoom);
+    }
+  }, [zoom]);
+
+  const handleZoomIn = () => setZoom((z) => Math.min(z + 0.2, maxZoom));
+  const handleZoomOut = () => setZoom((z) => Math.max(z - 0.2, minZoom));
+  const handleZoomReset = () => setZoom(1);
+
   const treeProps = {
     data: treeData,
     orientation: "vertical" as const,
@@ -83,11 +99,74 @@ const OrgChart: React.FC<OrgChartProps> = ({ employees, onManagerChange, selecte
     zoomable: true,
     collapsible: true,
     renderCustomNodeElement: renderNode,
+    scaleExtent: { min: minZoom, max: maxZoom },
+    zoom,
   };
 
   return (
     <section className="org-section">
-      <h2 className="org-title">Organization Chart</h2>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
+        <h2 className="org-title">Organization Chart</h2>
+        <div style={{
+          position: "relative",
+          zIndex: 2,
+          background: "#fff",
+          borderRadius: 16,
+          boxShadow: "0 2px 8px rgba(37,99,235,0.08)",
+          padding: "0.25rem 0.5rem",
+          display: "flex",
+          gap: "0.25rem",
+        }}>
+          <button
+            style={{
+              background: "#2563eb",
+              color: "#fff",
+              borderRadius: 16,
+              padding: "0.25rem 0.6rem",
+              fontWeight: 600,
+              border: "none",
+              cursor: "pointer",
+              fontSize: "1rem",
+            }}
+            onClick={handleZoomOut}
+            title="Zoom Out"
+          >
+            -
+          </button>
+          <button
+            style={{
+              background: "#2563eb",
+              color: "#fff",
+              borderRadius: 16,
+              padding: "0.25rem 0.6rem",
+              fontWeight: 600,
+              border: "none",
+              cursor: "pointer",
+              fontSize: "1rem",
+            }}
+            onClick={handleZoomIn}
+            title="Zoom In"
+          >
+            +
+          </button>
+          <button
+            style={{
+              background: "#2563eb",
+              color: "#fff",
+              borderRadius: 16,
+              padding: "0.25rem 0.6rem",
+              fontWeight: 600,
+              border: "none",
+              cursor: "pointer",
+              fontSize: "1rem",
+            }}
+            onClick={handleZoomReset}
+            title="Reset Zoom"
+          >
+            Reset
+          </button>
+        </div>
+      </div>
       <div className="org-canvas">
         <Tree
           ref={treeRef}
