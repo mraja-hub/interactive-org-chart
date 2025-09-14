@@ -70,7 +70,7 @@ const CustomNode: React.FC<CustomNodeProps> = ({ nodeDatum, onManagerChange, isR
               }}
             >
               {nodeDatum.name}
-              {isRoot && <span title="CEO is fixed" style={{ fontSize: "1.2rem", marginLeft: 4 }}>🔒</span>}
+              {isRoot && <span data-testid="lock-icon" title="CEO is fixed" style={{ fontSize: "1.2rem", marginLeft: 4 }}>🔒</span>}
             </div>
             <div
               className="node-designation"
