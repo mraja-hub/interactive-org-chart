@@ -3,6 +3,8 @@ import React, { useMemo, useRef, useEffect } from "react";
 import Tree from "react-d3-tree";
 import type { Employee } from "./Sidebar";
 import { buildTreeData } from "../utils/buildTreeData";
+import { DndContext } from "@dnd-kit/core";
+import CustomNode from "./CustomNode";
 import "./OrgChart.css";
 
 interface OrgChartProps {
@@ -10,51 +12,21 @@ interface OrgChartProps {
   onManagerChange: (employeeId: string, newManagerId: string) => void;
 }
 
-
-
 const OrgChart: React.FC<OrgChartProps> = ({ employees, onManagerChange }) => {
   const treeData = useMemo(() => buildTreeData(employees), [employees]);
   const treeRef = useRef<any>(null);
 
-  // Custom node renderer
+  // Custom node renderer using DnD-enabled CustomNode
   const renderNode = (props: any) => {
     const { nodeDatum } = props;
     if (nodeDatum.attributes?.id === "root") {
       return <g />;
     }
-
-    // Determine image source: use photoUrl if present, else fallback to ui-avatars
-    const photoUrl =
-      nodeDatum.attributes.photoUrl ||
-      `https://ui-avatars.com/api/?name=${encodeURIComponent(nodeDatum.name)}&background=2563eb&color=fff&size=128`;
-
     return (
-      <g>
-        <foreignObject width={320} height={110} x={-160} y={-55}>
-          <div className="node-card node-card-row" style={{ minHeight: 90, minWidth: 280, maxWidth: 400, paddingLeft: 18 }}>
-            <img
-              src={photoUrl}
-              alt={nodeDatum.name}
-              className="node-photo"
-              style={{
-                width: 64,
-                height: 64,
-                borderRadius: 8,
-                objectFit: "cover",
-                marginRight: 20,
-                background: "#e3eafc",
-                marginBottom: 0,
-                flexShrink: 0,
-              }}
-            />
-            <div className="node-info" style={{ minWidth: 0 }}>
-              <div className="node-name" style={{ fontWeight: 700, fontSize: "1.35rem", wordBreak: "break-word" }}>{nodeDatum.name}</div>
-              <div className="node-designation" style={{ fontSize: "1.08rem", color: "#333", wordBreak: "break-word" }}>({nodeDatum.attributes.designation})</div>
-              <div className="node-team" style={{ fontSize: "1rem", color: "#888", wordBreak: "break-word" }}>{nodeDatum.attributes.team}</div>
-            </div>
-          </div>
-        </foreignObject>
-      </g>
+      <CustomNode
+        nodeDatum={nodeDatum}
+        onManagerChange={onManagerChange}
+      />
     );
   };
 
@@ -89,6 +61,14 @@ const OrgChart: React.FC<OrgChartProps> = ({ employees, onManagerChange }) => {
     zoom,
   };
 
+  // DnD handler: when a node is dropped onto another, call onManagerChange
+  const handleDragEnd = (event: any) => {
+    const { active, over } = event;
+    if (active?.id && over?.id && active.id !== over.id) {
+      onManagerChange(String(active.id), String(over.id));
+    }
+  };
+
   return (
     <section className="org-section">
       <div className="org-header">
@@ -100,10 +80,12 @@ const OrgChart: React.FC<OrgChartProps> = ({ employees, onManagerChange }) => {
         </div>
       </div>
       <div className="org-canvas">
-        <Tree
-          ref={treeRef}
-          {...(treeProps as any)}
-        />
+        <DndContext onDragEnd={handleDragEnd}>
+          <Tree
+            ref={treeRef}
+            {...(treeProps as any)}
+          />
+        </DndContext>
       </div>
     </section>
   );
