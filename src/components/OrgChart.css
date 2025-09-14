@@ -1,0 +1,53 @@
+/* OrgChart.css */
+.org-section {
+  width: 77vw;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 2rem;
+}
+
+.org-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #2563eb;
+  margin: 0 0 1rem 0;
+}
+
+/* container that holds the svg/tree; adjust height as needed */
+.org-canvas {
+  flex: 1;
+  min-height: 600px;
+  border-radius: 12px;
+  background: repeating-linear-gradient(135deg, #f0f4ff 0px, #f0f4ff 40px, #e3eafc 40px, #e3eafc 80px);
+  padding: 2rem;
+  overflow: auto;
+}
+
+/* Node card displayed inside foreignObject */
+.node-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  font-family: Inter, Arial, sans-serif;
+  min-width: 160px;
+}
+
+.node-name {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.node-designation {
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.node-team {
+  color: #888;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}

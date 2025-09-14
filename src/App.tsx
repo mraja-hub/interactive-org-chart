@@ -11,17 +11,15 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [team, setTeam] = useState('');
+  const [selectedEmployeeId, setSelectedEmployeeId] = useState<string | null>(null);
 
   useEffect(() => {
-    // Use mock data for scalability test
     setEmployees(mockEmployees);
     setLoading(false);
   }, []);
 
-  // Get unique teams for dropdown
   const teams = Array.from(new Set(employees.map((e) => e.team)));
 
-  // Filtering logic
   const filteredEmployees = employees.filter((emp) => {
     const matchesSearch = [emp.name, emp.designation, emp.team]
       .join(' ')
@@ -31,10 +29,8 @@ function App() {
     return matchesSearch && matchesTeam;
   });
 
-  // For org chart, filter by team if selected
   const chartEmployees = team ? employees.filter((emp) => emp.team === team) : employees;
 
-  // Handler for drag-and-drop manager change
   const handleManagerChange = (employeeId: string, newManagerId: string) => {
     setEmployees((prev) =>
       prev.map((emp) => (emp.id === employeeId ? { ...emp, manager: newManagerId } : emp))
@@ -55,8 +51,14 @@ function App() {
         team={team}
         onTeamChange={setTeam}
         teams={teams}
+        onSelectEmployee={setSelectedEmployeeId}
+        selectedEmployeeId={selectedEmployeeId}
       />
-      <OrgChart employees={chartEmployees} onManagerChange={handleManagerChange} />
+      <OrgChart
+        employees={chartEmployees}
+        onManagerChange={handleManagerChange}
+        selectedEmployeeId={selectedEmployeeId}
+      />
     </div>
   );
 }

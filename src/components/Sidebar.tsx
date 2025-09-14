@@ -16,6 +16,8 @@ interface SidebarProps {
   team: string;
   onTeamChange: (value: string) => void;
   teams: string[];
+  onSelectEmployee?: (id: string) => void;
+  selectedEmployeeId?: string | null;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -25,6 +27,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   team,
   onTeamChange,
   teams,
+  onSelectEmployee,
+  selectedEmployeeId,
 }) => {
   return (
     <aside
@@ -85,10 +89,15 @@ const Sidebar: React.FC<SidebarProps> = ({
             key={emp.id}
             style={{
               marginBottom: '1rem',
-              background: '#f7f8fa',
+              background: emp.id === selectedEmployeeId ? '#e3eafc' : '#f7f8fa',
               borderRadius: '6px',
               padding: '0.5rem 0.75rem',
+              cursor: onSelectEmployee ? 'pointer' : undefined,
+              border: emp.id === selectedEmployeeId ? '2px solid #2563eb' : '1px solid #ccc',
+              fontWeight: emp.id === selectedEmployeeId ? 700 : 400,
+              boxShadow: emp.id === selectedEmployeeId ? '0 2px 8px rgba(37,99,235,0.08)' : undefined,
             }}
+            onClick={() => onSelectEmployee && onSelectEmployee(emp.id)}
           >
             <strong>{emp.name}</strong>
             <br />
