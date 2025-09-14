@@ -18,17 +18,6 @@ This app is deployed on Vercel and accessible at:
 
 ![Screenshot of Interactive Org Chart](./assets/org-chart-screenshot.png)
 
-## Why Bun?
-
-This project uses [Bun](https://bun.sh/) as the JavaScript runtime and package manager, alongside Vite for fast development and builds. Bun offers:
-
-- Much faster installs and script execution than npm or yarn
-- Native TypeScript and JSX support
-- Improved developer experience with modern features
-- Seamless compatibility with Vite and React
-
-**Note:** You must use Bun for all commands (not npm or yarn).
-
 ## Architecture & File Structure
 
 ```
@@ -66,21 +55,30 @@ org-chart
 1. **Install Bun:**
    [Follow Bun installation instructions](https://bun.sh/docs/installation)
 
-2. **Clone the repository:**
+   **Why Bun:**
+   This project uses [Bun](https://bun.sh/) as the JavaScript runtime and package manager, alongside Vite for fast development and builds. Bun offers:
+   - Much faster installs and script execution than npm or yarn
+   - Native TypeScript and JSX support
+   - Improved developer experience with modern features
+   - Seamless compatibility with Vite and React
+   
+   **Note:** You must use Bun for all commands (not npm or yarn).
+
+3. **Clone the repository:**
    ```
    git clone <repository-url>
    cd org-chart
    ```
-3. **Install dependencies:**
+4. **Install dependencies:**
    ```
    bun install
    ```
-4. **Start the development server:**
+5. **Start the development server:**
    ```
    bun run dev
    ```
 
-5. **Open the app:**
+6. **Open the app:**
    Visit `http://localhost:5173` in your browser.
 
 ## Running Tests
