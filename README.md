@@ -77,10 +77,71 @@ org-chart
 
 You can deploy this app to Netlify, Vercel, or any static hosting platform that supports Vite/React projects.
 
-## Design & Implementation Notes
 
-- Built with React functional components and hooks for maintainability.
-- Drag-and-drop is powered by dnd-kit for flexibility and accessibility.
-- Org chart layout uses custom tree rendering with connector lines for clarity.
-- Sidebar controls are sticky; only the employee list scrolls for usability.
-- Easily extendable for real API integration or additional features.
+<details>
+<summary>📖 <strong>Decision Points & Considerations</strong></summary>
+
+### 1. Project Setup & Tooling
+
+- **Vite + React + TypeScript** for fast builds, type safety, and modern DX.
+- **Bun** for local dev speed and package management.
+- **TypeScript** chosen for strong typing, maintainability, and team scaling.
+
+### 2. Org Chart Rendering
+
+- Considered custom recursive tree layout vs. react-d3-tree.
+- **Chose react-d3-tree** for:
+   - Performance with large datasets
+   - Built-in zoom, pan, responsive layouts
+   - Easier scaling and maintenance
+
+### 3. Drag & Drop (DND)
+
+- Evaluated custom drag logic vs. dnd-kit.
+- **Picked dnd-kit** for:
+   - Accessibility focus
+   - Extensible API for drop validation
+   - Good React integration
+- **Challenge:** Panning + dragging conflict → solved with Edit Mode toggle.
+
+### 4. Safe-Drop Logic
+
+- Prevented invalid org structures:
+   - No cycles (employee can’t become manager of their ancestor)
+   - No self-drops
+   - Root node (CEO) locked from drag, only droppable
+- **Decision:** Flexible reporting allowed, but hierarchy integrity preserved.
+
+### 5. Search & Filtering
+
+- Added search box (fuzzy matching by name, designation, team)
+- Added team filter (applies to sidebar and chart for consistent UX)
+
+### 6. Scalability
+
+- Mock data with 40+ employees to test performance
+- Ensured smooth pan/zoom for large trees
+- Chose react-d3-tree for future large data support
+
+### 7. Accessibility & UX
+
+- Keyboard accessibility (dnd-kit)
+- Visual cues:
+   - Hover highlight on droppable areas
+   - 🔒 lock indicator for CEO/root node
+- Considered pinch-zoom for trackpads & mobile
+
+### 8. Styling Choices
+
+- Avoided heavy CSS frameworks
+- Used CSS-in-JS + minimal custom CSS for control
+- Focus: maintainability, no global style conflicts
+
+### 9. Future Enhancements (Out of Scope)
+
+- Persisting changes via API (updateManager endpoint)
+- Animations for drag ghost (dnd-kit overlays)
+- Collapsible subtrees for very large orgs
+- Role-based rules (e.g., VPs must always report to CEO)
+
+</details>
