@@ -1,7 +1,6 @@
 // src/services/server.ts
 // MirageJS server for mock API
 
-// @ts-ignore: MirageJS types may be missing in Bun projects
 import { createServer, Model, Response } from "miragejs";
 import employeesWithPhotos from "../mockEmployees";
 

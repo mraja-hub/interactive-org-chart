@@ -31,8 +31,6 @@ export function buildTreeData(employees: Employee[]) {
       }
     });
 
-  // react-d3-tree accepts either an object or an array.
-  // if multiple roots, wrap under a synthetic root to keep layout stable.
   if (roots.length === 1) return roots[0];
   return {
     name: "Company",

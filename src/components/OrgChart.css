@@ -47,7 +47,6 @@
   box-shadow: 0 2px 8px rgba(37,99,235,0.04);
 }
 
-/* container that holds the svg/tree; adjust height as needed */
 .org-canvas {
   flex: 1;
   min-height: 600px;

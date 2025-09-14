@@ -7,7 +7,7 @@ interface CustomNodeProps {
   isRoot?: boolean;
 }
 
-const CustomNode: React.FC<CustomNodeProps> = ({ nodeDatum, onManagerChange, isRoot }) => {
+const CustomNode: React.FC<CustomNodeProps> = ({ nodeDatum, isRoot }) => {
   const id = nodeDatum.attributes?.id;
 
   // Only enable draggable for non-root nodes
