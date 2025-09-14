@@ -1,69 +1,71 @@
-# React + TypeScript + Vite
+# Employee Organization Chart
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a modern React application for visualizing and managing an interactive employee organization chart. It features drag-and-drop manager assignment, filtering, and smooth zoom/pan navigation for scalable org structures.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Interactive Org Chart**: Visualizes employee hierarchy in a clear, tree-like structure.
+- **Drag-and-Drop**: Change an employee's manager by dragging nodes in the chart.
+- **Filtering & Search**: Quickly find employees by name, designation, or team.
+- **Pinch/Zoom/Pan**: Navigate large org charts with intuitive gestures.
+- **Responsive UI**: Sidebar controls are always visible; employee list is scrollable.
+- **Accessible & Modern Design**: Clean layout, color contrasts, and keyboard navigation support.
 
-## Expanding the ESLint configuration
+## Architecture & File Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```
+org-chart
+├── src
+│   ├── components
+│   │   ├── OrgChart.tsx         # Main org chart rendering & pinch/zoom logic
+│   │   ├── EmployeeNode.tsx     # Recursive tree node with drag-and-drop
+│   │   ├── Sidebar.tsx          # Employee list, search, and filter controls
+│   ├── mockEmployees.ts         # Mock data for demo/testing
+│   ├── App.tsx                  # App layout and state management
+│   ├── App.css                  # Custom global styles
+│   └── main.tsx                 # Entry point
+├── public
+│   └── index.html
+├── package.json
+├── tsconfig.json
+└── README.md
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Packages & Technical Details
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+- **React**: UI library
+- **TypeScript**: Type safety
+- **Vite**: Fast dev/build tool
+- **@dnd-kit/core**: Drag-and-drop engine
+- **react-zoom-pan-pinch**: Zoom/pan gestures for chart navigation
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+## Getting Started
+
+1. **Clone the repository:**
+   ```
+   git clone <repository-url>
+   cd org-chart
+   ```
+2. **Install dependencies:**
+   ```
+   npm install
+   ```
+3. **Start the development server:**
+   ```
+   npm run dev
+   ```
+4. **Open the app:**
+   Visit `http://localhost:5173` in your browser.
+
+## Deployment
+
+You can deploy this app to Netlify, Vercel, or any static hosting platform that supports Vite/React projects.
+
+## Design & Implementation Notes
+
+- Built with React functional components and hooks for maintainability.
+- Drag-and-drop is powered by dnd-kit for flexibility and accessibility.
+- Org chart layout uses custom tree rendering with connector lines for clarity.
+- Sidebar controls are sticky; only the employee list scrolls for usability.
+- Easily extendable for real API integration or additional features.
+
